@@ -7,7 +7,7 @@ const Banner = () => {
             <div className='shapes md:block hidden'></div>
             <div className='arrowOne'></div>
             <div className='radial-banner hidden lg:block'></div>
-            <div className="mx-auto h-screen max-w-7xl pt-16 lg:pt-40 sm:pb-24 px-6">
+            <div className="mx-auto h-screen max-w-7xl pt-16 lg:pt-40 sm:pb-24 px-6 max-h-[960px]">
 
                 <div className='height-work'>
                     <div className='grid grid-cols-1 lg:grid-cols-12 my-16'>

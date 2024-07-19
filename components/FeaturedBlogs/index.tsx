@@ -1,5 +1,9 @@
+"use client";
 import Image from "next/image";
-import {draftMode} from 'next/headers'
+import {
+  PostOrderByInput,
+  useAllPostsQuery,
+} from "@/app/generated/hygraph-schema";
 
 interface workdata {
   imgSrc: string;
@@ -20,21 +24,29 @@ const workdata: workdata[] = [
   {
     imgSrc: "/images/Work/two.jpg",
     heading: "Second Blog",
-    subheading: "Lorem Ipsum is simply dummy text of the printing his um is simply dummy text of the printing hisum is simply dummy text of the printing his",
+    subheading:
+      "Lorem Ipsum is simply dummy text of the printing his um is simply dummy text of the printing hisum is simply dummy text of the printing his",
     hiddenpara:
       "standard dummy text ever since the 1500s, when an unknownprinter took a galley of type and scrambled it to make a type specimen book. It has survived...",
   },
   {
     imgSrc: "/images/Work/one.jpg",
     heading: "Second Blog",
-    subheading: "Lorem Ipsum is simply dummy text of the printing his um is simply dummy text of the printing hisum is simply dummy text of the printing hisum is simply dummy text of the printing hisum is simply dummy text of the printing his",
+    subheading:
+      "Lorem Ipsum is simply dummy text of the printing his um is simply dummy text of the printing hisum is simply dummy text of the printing hisum is simply dummy text of the printing hisum is simply dummy text of the printing his",
     hiddenpara:
       "standard dummy text ever since the 1500s, when an unknownprinter took a galley of type and scrambled it to make a type specimen book. It has survived...",
   },
 ];
 
 const Work = () => {
-  const preview = draftMode().isEnabled ? {token: process.env.SANITY_API_READ_TOKEN} : undefined
+  const { loading, error, data } = useAllPostsQuery({
+    variables: { orderBy: PostOrderByInput.PublishedAtAsc },
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :</p>;
+  if (!data?.posts) <p>No Data: </p>;
   return (
     <div>
       <div className="mx-auto max-w-7xl mt-16 px-6 mb-20 relative">
@@ -48,7 +60,7 @@ const Work = () => {
           </p>
         </div>
         <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-y-20 gap-x-5 mt-32">
-          {workdata.map((items, i) => (
+          {data?.posts.map((items, i) => (
             // <div className='card-b p-2' key={i}>
             //     <div>
             //         <Image src={'/images/Banner/intro.jpg'} alt="arrow-bg" width={0} height={0} sizes="100vw" className="w-full object-cover h-40 rounded-lg" />
@@ -62,23 +74,23 @@ const Work = () => {
               key={i}
             >
               <div className="rounded-t-lg w-full h-80 overflow-hidden object-cover relative">
-                <Image
-                  src={items.imgSrc}
-                  alt=""
-                  fill
-                />
+                {items.coverImage && (
+                  <Image src={items.coverImage.url} alt="" fill />
+                )}
               </div>
               <div className="p-5">
                 <a href="#">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-offwhite dark:white">
-                    {items.heading}
+                    {items.title}
                   </h5>
                 </a>
-                <p className="mb-3 font-normal  text-lightwhite dark:text-gray-400">
-                  {items.subheading.substring(0, 130)}
-                </p>
+                {items.excerpt && (
+                  <p className="mb-3 font-normal  text-lightwhite dark:text-gray-400">
+                    {items.excerpt.substring(0, 130)}
+                  </p>
+                )}
                 <a
-                  href="#" 
+                  href="#"
                   className="inline-flex items-center px-3 py-2 navbutton text-sm font-medium text-center text-white rounded-lg bg-darkblue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Read more
