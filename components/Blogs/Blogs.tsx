@@ -12,34 +12,7 @@ interface workdata {
   hiddenpara: string;
 }
 
-const workdata: workdata[] = [
-  {
-    imgSrc: "/images/Work/icon-one.svg",
-    heading: "Introduction about AI Baba",
-    subheading:
-      "Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum is simply dummy text of the printing and ",
-    hiddenpara:
-      "standard dummy text ever since the 1500s, when an unknownprinter took a galley of type and scrambled it to make a type specimen book. It has survived...",
-  },
-  {
-    imgSrc: "/images/Work/two.jpg",
-    heading: "Second Blog",
-    subheading:
-      "Lorem Ipsum is simply dummy text of the printing his um is simply dummy text of the printing hisum is simply dummy text of the printing his",
-    hiddenpara:
-      "standard dummy text ever since the 1500s, when an unknownprinter took a galley of type and scrambled it to make a type specimen book. It has survived...",
-  },
-  {
-    imgSrc: "/images/Work/one.jpg",
-    heading: "Second Blog",
-    subheading:
-      "Lorem Ipsum is simply dummy text of the printing his um is simply dummy text of the printing hisum is simply dummy text of the printing hisum is simply dummy text of the printing hisum is simply dummy text of the printing his",
-    hiddenpara:
-      "standard dummy text ever since the 1500s, when an unknownprinter took a galley of type and scrambled it to make a type specimen book. It has survived...",
-  },
-];
-
-const Work = () => {
+const AllBlogs = () => {
   const { loading, error, data } = useAllPostsQuery({
     variables: { orderBy: PostOrderByInput.PublishedAtAsc },
   });
@@ -49,16 +22,17 @@ const Work = () => {
   if (!data?.posts) <p>No Data: </p>;
   return (
     <div>
-      <div className="mx-auto max-w-7xl mt-16 px-6 mb-20 relative">
+      <div className="mx-auto max-w-7xl pt-16 mt-16 px-6 mb-20 relative">
         <div className="radial-bgone hidden lg:block"></div>
         <div className="text-center mb-14">
           <h3 className="text-offwhite text-3xl md:text-5xl font-bold mb-3">
-            Featured Blogs
+            Read about the latest in AI
           </h3>
           <p className="text-bluish md:text-lg font-normal leading-8">
-            Check some of the featured blogs.
+            All Blogs.
           </p>
         </div>
+        <div className="h-1 bg-white w-full"></div>
         <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-y-20 gap-x-5 mt-32">
           {data?.posts.map((items, i) => (
             // <div className='card-b p-2' key={i}>
@@ -90,7 +64,7 @@ const Work = () => {
                   </p>
                 )}
                 <a
-                  href="#"
+                  href="/blogs/1"
                   className="inline-flex items-center px-3 py-2 navbutton text-sm font-medium text-center text-white rounded-lg bg-darkblue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Read more
@@ -119,4 +93,4 @@ const Work = () => {
   );
 };
 
-export default Work;
+export default AllBlogs;

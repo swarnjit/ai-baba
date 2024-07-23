@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar/Navbar";
 import { Metadata } from "next";
-import "./globals.css";
 import Provider from "@/components/Providers/ApolloProvider";
 import SidePanel from "@/components/SidePanel/SidePanel";
 
@@ -15,11 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        <Provider>{children}</Provider>
-      </body>
-    </html>
+    <Provider>
+      <div className="mx-auto max-w-7xl mt-16 px-6 mb-20 relative">
+        <SidePanel>{children}</SidePanel>
+      </div>
+    </Provider>
   );
 }

@@ -4,9 +4,9 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 const config: CodegenConfig = {
   schema: process.env.NEXT_PUBLIC_GRAPHCSM_URL,
   overwrite: true,
-  documents: ["app/**/*.{ts,tsx,gql,graphql}"],
+  documents: ["graphql/**/*.{ts,tsx,gql,graphql}"],
   generates: {
-    "./app/generated/hygraph-schema.tsx": {
+    "./graphql/generated/hygraph-schema.tsx": {
       plugins: [
         "typescript",
         "typescript-operations",
