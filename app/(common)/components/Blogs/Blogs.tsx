@@ -4,6 +4,7 @@ import {
   PostOrderByInput,
   useAllPostsQuery,
 } from "@/graphql/generated/hygraph-schema";
+import Link from "next/link";
 
 interface workdata {
   imgSrc: string;
@@ -63,8 +64,8 @@ const AllBlogs = () => {
                     {items.excerpt.substring(0, 130)}
                   </p>
                 )}
-                <a
-                  href="/blogs/1"
+                <Link
+                  href={`/blogs/${items.slug}`}
                   className="inline-flex items-center px-3 py-2 navbutton text-sm font-medium text-center text-white rounded-lg bg-darkblue hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Read more
@@ -83,7 +84,7 @@ const AllBlogs = () => {
                       d="M1 5h12m0 0L9 1m4 4L9 9"
                     />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           ))}

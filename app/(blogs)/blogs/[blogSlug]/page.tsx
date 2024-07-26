@@ -1,7 +1,2 @@
-import React from "react";
-
-const Blog = () => {
-  return <div></div>;
-};
-
+import Blog from "@/app/(common)/components/Blog/Blog";
 export default Blog;

@@ -1,0 +1,36 @@
+query PostBySlug($slug: String) {
+  post(where: { slug: $slug }) {
+    title
+    id
+    author {
+      name
+      title
+      picture {
+        altText
+        authorAvatar {
+          picture {
+            fileName
+            height
+            size
+            url
+            width
+          }
+        }
+      }
+    }
+    content {
+      html
+      json
+      markdown
+      text
+    }
+    coverImage {
+      height
+      id
+      size
+      url
+      width
+    }
+    stage
+  }
+}
