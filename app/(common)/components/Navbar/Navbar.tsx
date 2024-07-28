@@ -43,7 +43,7 @@ const Navbar = () => {
                 <img
                   className="hidden h-8 w-auto lg:block"
                   src={"/images/Logo/logo_v1.png"}
-                  alt="Crypto-Logo"
+                  alt="AI-Baba-Logo"
                 />
                 <p className="pl-4 font-bold text-2xl text-white">AI Baba</p>
               </div>

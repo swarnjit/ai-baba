@@ -2,6 +2,7 @@ import Navbar from "@/app/(common)/components/Navbar/Navbar";
 import { Metadata } from "next";
 import "./globals.css";
 import Provider from "@/components/Providers/ApolloProvider";
+import Footer from "./(common)/components/Footer";
 
 export const metadata: Metadata = {
   title: "AI-BABA | Home",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         <Provider>{children}</Provider>
+        <Footer />
       </body>
     </html>
   );

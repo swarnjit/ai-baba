@@ -26,10 +26,10 @@ const AllBlogs = () => {
       <div className="mx-auto max-w-7xl pt-16 mt-16 px-6 mb-20 relative">
         <div className="radial-bgone hidden lg:block"></div>
         <div className="text-center mb-14">
-          <h3 className="text-offwhite text-3xl md:text-5xl font-bold mb-3">
+          <h3 className="text-black text-3xl md:text-5xl font-bold mb-3">
             Read about the latest in AI
           </h3>
-          <p className="text-bluish md:text-lg font-normal leading-8">
+          <p className="text-darkblue md:text-lg font-normal leading-8">
             All Blogs.
           </p>
         </div>

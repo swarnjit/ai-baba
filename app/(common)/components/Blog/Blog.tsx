@@ -21,10 +21,10 @@ const Blog = ({ params }: Params) => {
   console.log("as path", post?.author?.name);
   return (
     <div className="pt-16">
-      <h3 className="text-offwhite text-3xl md:text-4xl font-bold mb-3">
+      <h3 className="text-black text-3xl md:text-4xl font-bold mb-3">
         {post?.title}
       </h3>
-      <h4 className="text-offwhite text-2xl md:text-2xl mb-3">
+      <h4 className="text-darkblue text-2xl md:text-2xl mb-3">
         Author: {post?.author?.name}
       </h4>
     </div>

@@ -13,10 +13,10 @@ const Banner = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 my-16">
             {/* <div className='arrowTwo'></div> */}
             <div className="col-span-7">
-              <h1 className="text-4xl lg:text-7xl font-bold mb-5 text-white md:4px md:text-start">
+              <h1 className="text-4xl lg:text-7xl font-bold mb-5 text-black md:4px md:text-start">
                 All About Artificial Intelligence <br /> Blog By Blog
               </h1>
-              <p className="text-white md:text-lg font-normal mb-10 md:text-start">
+              <p className="text-black md:text-lg font-normal mb-10 md:text-start">
                 Unleashing the Power of Artificial Intelligence: Exploring the
                 Frontiers of Intelligent Technology
               </p>
