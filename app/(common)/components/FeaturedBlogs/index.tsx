@@ -12,33 +12,6 @@ interface workdata {
   hiddenpara: string;
 }
 
-const workdata: workdata[] = [
-  {
-    imgSrc: "/images/Work/icon-one.svg",
-    heading: "Introduction about AI Baba",
-    subheading:
-      "Lorem Ipsum is simply dummy text of the printing and Lorem Ipsum is simply dummy text of the printing and ",
-    hiddenpara:
-      "standard dummy text ever since the 1500s, when an unknownprinter took a galley of type and scrambled it to make a type specimen book. It has survived...",
-  },
-  {
-    imgSrc: "/images/Work/two.jpg",
-    heading: "Second Blog",
-    subheading:
-      "Lorem Ipsum is simply dummy text of the printing his um is simply dummy text of the printing hisum is simply dummy text of the printing his",
-    hiddenpara:
-      "standard dummy text ever since the 1500s, when an unknownprinter took a galley of type and scrambled it to make a type specimen book. It has survived...",
-  },
-  {
-    imgSrc: "/images/Work/one.jpg",
-    heading: "Second Blog",
-    subheading:
-      "Lorem Ipsum is simply dummy text of the printing his um is simply dummy text of the printing hisum is simply dummy text of the printing hisum is simply dummy text of the printing hisum is simply dummy text of the printing his",
-    hiddenpara:
-      "standard dummy text ever since the 1500s, when an unknownprinter took a galley of type and scrambled it to make a type specimen book. It has survived...",
-  },
-];
-
 const Work = () => {
   const { loading, error, data } = useAllPostsQuery({
     variables: { orderBy: PostOrderByInput.PublishedAtAsc },

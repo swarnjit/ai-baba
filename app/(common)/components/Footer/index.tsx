@@ -15,7 +15,7 @@ const socialLinks: Social[] = [
 
 const Footer = () => {
   return (
-    <div className="bg-lightblue relative pt-8">
+    <div className="bg-lightblue relative pt-8 bottom-0">
       <div className="radial-bg hidden lg:block"></div>
       <div className="mx-auto max-w-2xl pb-16 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="grid grid-cols-1 gap-y-10 gap-x-16 sm:grid-cols-2 lg:grid-cols-12 xl:gap-x-8">

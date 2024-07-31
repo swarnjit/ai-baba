@@ -1354,6 +1354,7 @@ export type Category = Entity & Node & {
   /** The unique identifier */
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  post: Array<Post>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   /** User that last published this document */
@@ -1386,6 +1387,19 @@ export type CategoryHistoryArgs = {
   limit?: Scalars['Int']['input'];
   skip?: Scalars['Int']['input'];
   stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type CategoryPostArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<PostOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<PostWhereInput>;
 };
 
 
@@ -1432,6 +1446,7 @@ export type CategoryConnection = {
 export type CategoryCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   name: Scalars['String']['input'];
+  post?: InputMaybe<PostCreateManyInlineInput>;
   slug: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
 };
@@ -1526,6 +1541,9 @@ export type CategoryManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  post_every?: InputMaybe<PostWhereInput>;
+  post_none?: InputMaybe<PostWhereInput>;
+  post_some?: InputMaybe<PostWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1599,6 +1617,7 @@ export enum CategoryOrderByInput {
 
 export type CategoryUpdateInput = {
   name?: InputMaybe<Scalars['String']['input']>;
+  post?: InputMaybe<PostUpdateManyInlineInput>;
   slug?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1740,6 +1759,9 @@ export type CategoryWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']['input']>;
+  post_every?: InputMaybe<PostWhereInput>;
+  post_none?: InputMaybe<PostWhereInput>;
+  post_some?: InputMaybe<PostWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5203,6 +5225,7 @@ export type Post = Entity & Node & {
   __typename?: 'Post';
   /** Who should be credited with writing this post? */
   author?: Maybe<Author>;
+  category: Array<Category>;
   /** Write your blog post! */
   content: PostContentRichText;
   /** Upload or select a cover image to set as your Featured Image */
@@ -5243,6 +5266,19 @@ export type Post = Entity & Node & {
 export type PostAuthorArgs = {
   forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
   locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type PostCategoryArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<CategoryOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<CategoryWhereInput>;
 };
 
 
@@ -5345,6 +5381,7 @@ export type PostContentRichTextEmbeddedTypes = Asset;
 
 export type PostCreateInput = {
   author?: InputMaybe<AuthorCreateOneInlineInput>;
+  category?: InputMaybe<CategoryCreateManyInlineInput>;
   content: Scalars['RichTextAST']['input'];
   coverImage?: InputMaybe<AssetCreateOneInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5390,6 +5427,9 @@ export type PostManyWhereInput = {
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']['input']>;
   author?: InputMaybe<AuthorWhereInput>;
+  category_every?: InputMaybe<CategoryWhereInput>;
+  category_none?: InputMaybe<CategoryWhereInput>;
+  category_some?: InputMaybe<CategoryWhereInput>;
   coverImage?: InputMaybe<AssetWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
@@ -5560,6 +5600,7 @@ export enum PostOrderByInput {
 
 export type PostUpdateInput = {
   author?: InputMaybe<AuthorUpdateOneInlineInput>;
+  category?: InputMaybe<CategoryUpdateManyInlineInput>;
   content?: InputMaybe<Scalars['RichTextAST']['input']>;
   coverImage?: InputMaybe<AssetUpdateOneInlineInput>;
   date?: InputMaybe<Scalars['Date']['input']>;
@@ -5653,6 +5694,9 @@ export type PostWhereInput = {
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']['input']>;
   author?: InputMaybe<AuthorWhereInput>;
+  category_every?: InputMaybe<CategoryWhereInput>;
+  category_none?: InputMaybe<CategoryWhereInput>;
+  category_some?: InputMaybe<CategoryWhereInput>;
   coverImage?: InputMaybe<AssetWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
@@ -8250,6 +8294,11 @@ export type AllPostsQueryVariables = Exact<{
 
 export type AllPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', id: string, title: string, slug: string, excerpt?: string | null, date: any, coverImage?: { __typename?: 'Asset', id: string, url: string } | null, content: { __typename?: 'PostContentRichText', text: string }, author?: { __typename?: 'Author', id: string } | null }> };
 
+export type LatestPostQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LatestPostQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', title: string, id: string, author?: { __typename?: 'Author', name: string, title?: string | null, picture?: { __typename?: 'Asset', altText?: string | null, authorAvatar: Array<{ __typename?: 'Author', picture?: { __typename?: 'Asset', fileName: string, height?: number | null, size?: number | null, url: string, width?: number | null } | null }> } | null } | null, content: { __typename?: 'PostContentRichText', html: string, json: any, markdown: string, text: string }, coverImage?: { __typename?: 'Asset', height?: number | null, id: string, size?: number | null, url: string, width?: number | null } | null }> };
+
 
 export const PostBySlugDocument = gql`
     query PostBySlug($slug: String) {
@@ -8379,6 +8428,75 @@ export type AllPostsQueryHookResult = ReturnType<typeof useAllPostsQuery>;
 export type AllPostsLazyQueryHookResult = ReturnType<typeof useAllPostsLazyQuery>;
 export type AllPostsSuspenseQueryHookResult = ReturnType<typeof useAllPostsSuspenseQuery>;
 export type AllPostsQueryResult = Apollo.QueryResult<AllPostsQuery, AllPostsQueryVariables>;
+export const LatestPostDocument = gql`
+    query latestPost {
+  posts(first: 1, orderBy: publishedAt_DESC) {
+    title
+    id
+    author {
+      name
+      title
+      picture {
+        altText
+        authorAvatar {
+          picture {
+            fileName
+            height
+            size
+            url
+            width
+          }
+        }
+      }
+    }
+    content {
+      html
+      json
+      markdown
+      text
+    }
+    coverImage {
+      height
+      id
+      size
+      url
+      width
+    }
+  }
+}
+    `;
+
+/**
+ * __useLatestPostQuery__
+ *
+ * To run a query within a React component, call `useLatestPostQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLatestPostQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLatestPostQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLatestPostQuery(baseOptions?: Apollo.QueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
+      }
+export function useLatestPostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
+        }
+export function useLatestPostSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
+        }
+export type LatestPostQueryHookResult = ReturnType<typeof useLatestPostQuery>;
+export type LatestPostLazyQueryHookResult = ReturnType<typeof useLatestPostLazyQuery>;
+export type LatestPostSuspenseQueryHookResult = ReturnType<typeof useLatestPostSuspenseQuery>;
+export type LatestPostQueryResult = Apollo.QueryResult<LatestPostQuery, LatestPostQueryVariables>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {
