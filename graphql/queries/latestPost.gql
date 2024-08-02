@@ -2,6 +2,7 @@ query latestPost {
   posts(first: 1, orderBy: publishedAt_DESC) {
     title
     id
+    slug
     author {
       name
       title

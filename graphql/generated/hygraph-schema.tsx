@@ -8277,6 +8277,11 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type LatestPostQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LatestPostQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', title: string, id: string, slug: string, author?: { __typename?: 'Author', name: string, title?: string | null, picture?: { __typename?: 'Asset', altText?: string | null, authorAvatar: Array<{ __typename?: 'Author', picture?: { __typename?: 'Asset', fileName: string, height?: number | null, size?: number | null, url: string, width?: number | null } | null }> } | null } | null, content: { __typename?: 'PostContentRichText', html: string, json: any, markdown: string, text: string }, coverImage?: { __typename?: 'Asset', height?: number | null, id: string, size?: number | null, url: string, width?: number | null } | null }> };
+
 export type PostBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -8294,12 +8299,77 @@ export type AllPostsQueryVariables = Exact<{
 
 export type AllPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', id: string, title: string, slug: string, excerpt?: string | null, date: any, coverImage?: { __typename?: 'Asset', id: string, url: string } | null, content: { __typename?: 'PostContentRichText', text: string }, author?: { __typename?: 'Author', id: string } | null }> };
 
-export type LatestPostQueryVariables = Exact<{ [key: string]: never; }>;
 
+export const LatestPostDocument = gql`
+    query latestPost {
+  posts(first: 1, orderBy: publishedAt_DESC) {
+    title
+    id
+    slug
+    author {
+      name
+      title
+      picture {
+        altText
+        authorAvatar {
+          picture {
+            fileName
+            height
+            size
+            url
+            width
+          }
+        }
+      }
+    }
+    content {
+      html
+      json
+      markdown
+      text
+    }
+    coverImage {
+      height
+      id
+      size
+      url
+      width
+    }
+  }
+}
+    `;
 
-export type LatestPostQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', title: string, id: string, author?: { __typename?: 'Author', name: string, title?: string | null, picture?: { __typename?: 'Asset', altText?: string | null, authorAvatar: Array<{ __typename?: 'Author', picture?: { __typename?: 'Asset', fileName: string, height?: number | null, size?: number | null, url: string, width?: number | null } | null }> } | null } | null, content: { __typename?: 'PostContentRichText', html: string, json: any, markdown: string, text: string }, coverImage?: { __typename?: 'Asset', height?: number | null, id: string, size?: number | null, url: string, width?: number | null } | null }> };
-
-
+/**
+ * __useLatestPostQuery__
+ *
+ * To run a query within a React component, call `useLatestPostQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLatestPostQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLatestPostQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLatestPostQuery(baseOptions?: Apollo.QueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
+      }
+export function useLatestPostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
+        }
+export function useLatestPostSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
+        }
+export type LatestPostQueryHookResult = ReturnType<typeof useLatestPostQuery>;
+export type LatestPostLazyQueryHookResult = ReturnType<typeof useLatestPostLazyQuery>;
+export type LatestPostSuspenseQueryHookResult = ReturnType<typeof useLatestPostSuspenseQuery>;
+export type LatestPostQueryResult = Apollo.QueryResult<LatestPostQuery, LatestPostQueryVariables>;
 export const PostBySlugDocument = gql`
     query PostBySlug($slug: String) {
   post(where: {slug: $slug}) {
@@ -8428,75 +8498,6 @@ export type AllPostsQueryHookResult = ReturnType<typeof useAllPostsQuery>;
 export type AllPostsLazyQueryHookResult = ReturnType<typeof useAllPostsLazyQuery>;
 export type AllPostsSuspenseQueryHookResult = ReturnType<typeof useAllPostsSuspenseQuery>;
 export type AllPostsQueryResult = Apollo.QueryResult<AllPostsQuery, AllPostsQueryVariables>;
-export const LatestPostDocument = gql`
-    query latestPost {
-  posts(first: 1, orderBy: publishedAt_DESC) {
-    title
-    id
-    author {
-      name
-      title
-      picture {
-        altText
-        authorAvatar {
-          picture {
-            fileName
-            height
-            size
-            url
-            width
-          }
-        }
-      }
-    }
-    content {
-      html
-      json
-      markdown
-      text
-    }
-    coverImage {
-      height
-      id
-      size
-      url
-      width
-    }
-  }
-}
-    `;
-
-/**
- * __useLatestPostQuery__
- *
- * To run a query within a React component, call `useLatestPostQuery` and pass it any options that fit your needs.
- * When your component renders, `useLatestPostQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useLatestPostQuery({
- *   variables: {
- *   },
- * });
- */
-export function useLatestPostQuery(baseOptions?: Apollo.QueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
-      }
-export function useLatestPostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
-        }
-export function useLatestPostSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<LatestPostQuery, LatestPostQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<LatestPostQuery, LatestPostQueryVariables>(LatestPostDocument, options);
-        }
-export type LatestPostQueryHookResult = ReturnType<typeof useLatestPostQuery>;
-export type LatestPostLazyQueryHookResult = ReturnType<typeof useLatestPostLazyQuery>;
-export type LatestPostSuspenseQueryHookResult = ReturnType<typeof useLatestPostSuspenseQuery>;
-export type LatestPostQueryResult = Apollo.QueryResult<LatestPostQuery, LatestPostQueryVariables>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {
