@@ -16,8 +16,8 @@ const Banner = () => {
               <h1 className="text-4xl lg:text-7xl font-bold mb-5 text-black md:4px md:text-start">
                 All About{" "}
                 <span className="text-[#2D6ADE]">Artificial Intelligence</span>{" "}
-                and <span className="text-[#BD24DF]">Tech</span>
-                <br /> Blog By Blog
+                and <span className="text-[#BD24DF]">Tech,</span>
+                <br /> Blog By Blog.
               </h1>
               <p className="text-black md:text-lg font-normal mb-10 md:text-start">
                 Unleashing the Power of Artificial Intelligence: Exploring the

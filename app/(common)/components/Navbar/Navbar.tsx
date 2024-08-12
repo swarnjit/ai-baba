@@ -5,7 +5,14 @@ import React from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Drawer from "./Drawer";
 import Drawerdata from "./Drawerdata";
-// import Contactusform from './Contactus';
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
 
 interface NavigationItem {
   name: string;
@@ -17,6 +24,7 @@ const navigation: NavigationItem[] = [
   { name: "Home", href: "/", current: false },
   { name: "All Blogs", href: "blogs", current: false },
   { name: "Featured", href: "#featured", current: false },
+  { name: "About", href: "/about", current: false },
 ];
 
 function classNames(...classes: string[]) {
@@ -67,16 +75,34 @@ const Navbar = () => {
                       {item.name}
                     </Link>
                   ))}
+                  <Menubar>
+                    <MenubarMenu>
+                      <MenubarTrigger
+                        className={classNames(
+                          "navlinks text-white hover:text-offwhite hover-underline",
+                          "px-3 py-4 rounded-md text-lg font-normal"
+                        )}
+                      >
+                        Categories
+                      </MenubarTrigger>
+                      <MenubarContent className="menubar-bg">
+                        <MenubarItem className="text-white hover:text-offwhite hover-underline rounded-md text-lg font-normal">
+                          Smartphones
+                        </MenubarItem>
+                        <MenubarSeparator />
+                        <MenubarItem className="text-white hover:text-offwhite hover-underline rounded-md text-lg font-normal">
+                          Computers
+                        </MenubarItem>
+                        <MenubarSeparator />
+                        <MenubarItem className="text-white hover:text-offwhite hover-underline rounded-md text-lg font-normal">
+                          Artificial Intelligence
+                        </MenubarItem>
+                      </MenubarContent>
+                    </MenubarMenu>
+                  </Menubar>
                 </div>
               </div>
-              {/* <button className='hidden lg:flex justify-end text-xl font-semibold py-4 px-6 lg:px-12 navbutton text-white'>Connect Wallet</button> */}
-              {/* <Contactusform /> */}
             </div>
-
-            {/* DRAWER FOR MOBILE VIEW */}
-
-            {/* DRAWER ICON */}
-
             <div className="block lg:hidden">
               <Bars3Icon
                 className="block h-6 w-6 text-white"
@@ -84,9 +110,6 @@ const Navbar = () => {
                 onClick={() => setIsOpen(true)}
               />
             </div>
-
-            {/* DRAWER LINKS DATA */}
-
             <Drawer isOpen={isOpen} setIsOpen={setIsOpen}>
               <Drawerdata />
             </Drawer>

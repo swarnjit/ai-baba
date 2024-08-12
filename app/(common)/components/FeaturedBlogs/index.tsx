@@ -24,7 +24,7 @@ const Work = () => {
     <div>
       <div className="mx-auto max-w-7xl mt-16 px-6 mb-20 relative">
         <div className="radial-bgone hidden lg:block"></div>
-        <div className="text-center mb-14">
+        <div className="text-start mb-6">
           <h3 className="text-black text-3xl md:text-5xl font-bold mb-3">
             Featured Blogs
           </h3>
@@ -32,7 +32,7 @@ const Work = () => {
             Check some of the featured blogs.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-y-20 gap-x-5 mt-32">
+        <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-y-20 gap-x-5 mt-10">
           {data?.posts.map((items, i) => (
             // <div className='card-b p-2' key={i}>
             //     <div>

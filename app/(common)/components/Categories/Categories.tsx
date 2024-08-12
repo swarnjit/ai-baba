@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useGetAllCategoriesQuery } from "@/graphql/generated/hygraph-schema";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const data = [
   {
     id: 1,
@@ -29,21 +32,29 @@ const Colors = {
   video: "#7fb88133",
   others: "#ff795736",
 };
-const CategoryList = async () => {
+const CategoryList = () => {
+  const { loading, error, data: dataServer } = useGetAllCategoriesQuery();
+  const categories = dataServer?.categories;
   return (
     <div className="">
       <h1 className="text-black text-3xl md:text-5xl font-bold mb-8">
         Popular Categories
       </h1>
       <div className="flex flex-wrap justify-between gap-6">
-        {data?.map((item) => (
+        {categories?.map((item) => (
           <Link
             href="/blog?cat=style"
-            className="py-4 px-6 lg:px-12 categoryCard mr-6 w-3/12 h-24 flex justify-center text-black hover:text-white hover-underline-category"
-            key={item.id}
+            className="rounded-xl overflow-hidden py-4 px-6 lg:px-12 mr-6 w-3/12 h-24 flex justify-center text-black bg-[#ecf2ff;]"
+            key={item?.name}
           >
-            <div className="text-3xl font-semibold capitalize">
-              {item.title}
+            <div className="flex flex-col justify-center align-middle">
+              <Avatar className="h-8 w-8 overflow-hidden mr-4">
+                <AvatarImage src="/images/avatar.webp" alt="avatar" />
+                <AvatarFallback>AN</AvatarFallback>
+              </Avatar>
+            </div>
+            <div className="flex flex-col justify-center align-middle">
+              {item?.name}
             </div>
           </Link>
         ))}

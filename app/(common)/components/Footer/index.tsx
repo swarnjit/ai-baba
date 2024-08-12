@@ -40,19 +40,6 @@ const Footer = () => {
               ))}
             </div>
           </div>
-
-          <div className="col-span-4">
-            <h3 className="text-white text-xl font-medium mb-9">Contact Us</h3>
-            <h4 className="text-offwhite text-sm font-normal mb-6 flex gap-2">
-              <Image
-                src={"/images/Footer/number.svg"}
-                alt="number-icon"
-                width={20}
-                height={20}
-              />
-              (406) 555-4444
-            </h4>
-          </div>
         </div>
       </div>
 

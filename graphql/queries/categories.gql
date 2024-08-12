@@ -1,0 +1,7 @@
+query GetAllCategories {
+  categories(orderBy: name_ASC) {
+    id
+    name
+    slug
+  }
+}
