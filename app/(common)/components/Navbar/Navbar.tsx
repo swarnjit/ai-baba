@@ -23,7 +23,7 @@ interface NavigationItem {
 const navigation: NavigationItem[] = [
   { name: "Home", href: "/", current: false },
   { name: "All Blogs", href: "blogs", current: false },
-  { name: "Featured", href: "#featured", current: false },
+  { name: "Featured", href: "/#recent_posts", current: false },
   { name: "About", href: "/about", current: false },
 ];
 

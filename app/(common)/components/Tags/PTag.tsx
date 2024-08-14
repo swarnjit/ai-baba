@@ -5,7 +5,7 @@ interface CodeTagProps {
 }
 const PTag = ({ children }: CodeTagProps) => (
   <div className="">
-    <p className="leading-7">{children}</p>
+    <p className="leading-7 text-black">{children}</p>
   </div>
 );
 export default PTag;

@@ -44,17 +44,19 @@ const CategoryList = () => {
         {categories?.map((item) => (
           <Link
             href="/blog?cat=style"
-            className="rounded-xl overflow-hidden py-4 px-6 lg:px-12 mr-6 w-3/12 h-24 flex justify-center text-black bg-[#ecf2ff;]"
+            className="rounded-xl overflow-hidden w-1/5 h-40 flex flex-col justify-center bg-[#ecf2ff;]"
             key={item?.name}
           >
-            <div className="flex flex-col justify-center align-middle">
-              <Avatar className="h-8 w-8 overflow-hidden mr-4">
+            {/* <div className="flex flex-row justify-center align-middle w-full">
+              <Avatar className="h-8 w-8 overflow-hidden">
                 <AvatarImage src="/images/avatar.webp" alt="avatar" />
                 <AvatarFallback>AN</AvatarFallback>
               </Avatar>
-            </div>
-            <div className="flex flex-col justify-center align-middle">
-              {item?.name}
+            </div> */}
+            <div className="w-full flex flex-row justify-center align-middle">
+              <p className="text-xl font-bold text-justify text-[#2D6ADE]">
+                {item?.name}
+              </p>
             </div>
           </Link>
         ))}

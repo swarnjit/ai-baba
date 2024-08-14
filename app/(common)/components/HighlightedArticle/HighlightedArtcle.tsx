@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Post, useLatestPostQuery } from "@/graphql/generated/hygraph-schema";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
+import PTag from "../Tags/PTag";
 
 interface LinkTagProps {
   children: React.ReactNode;
@@ -32,7 +33,7 @@ const HighlightedArticle = () => {
     );
 
   return (
-    <div className="bg-offwhite rounded-3xl relative min-h-60 flex flex-row w-full p-6 gap-5">
+    <div className="bg-offwhite rounded-3xl relative min-h-60 flex flex-row w-full p-6 gap-5 mb-10">
       <div className="w-1/2 flex flex-col">
         <div className="rounded-lg w-auto h-80 overflow-hidden object-cover relative p-4">
           {post?.coverImage?.url && (
@@ -52,6 +53,9 @@ const HighlightedArticle = () => {
           components={{
             a: (props) => {
               return <LinkTag href={props.href}>{props.children}</LinkTag>;
+            },
+            p: (props) => {
+              return <PTag>{props.children}</PTag>;
             },
           }}
         >
