@@ -25,12 +25,16 @@ const HighlightedArticle = () => {
     <div className="text-red">{children}</div>
   );
 
-  const LinkTag = ({ children, href }: LinkTagProps) =>
-    href && (
+  const LinkTag = ({ children, href }: LinkTagProps) => {
+    if (!href) {
+      return null;
+    }
+    return (
       <a href={href} className="text-green">
         {children}
       </a>
     );
+  };
 
   return (
     <div className="bg-offwhite rounded-3xl relative min-h-60 flex flex-row w-full p-6 gap-5 mb-10">

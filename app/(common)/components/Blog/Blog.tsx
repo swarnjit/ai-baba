@@ -26,13 +26,16 @@ const Blog = ({ params }: Params) => {
     variables: { slug: params.blogSlug },
   });
 
-  const LinkTag = ({ children, href }: LinkTagProps) =>
-    href && (
+  const LinkTag = ({ children, href }: LinkTagProps) => {
+    if (!href) {
+      return null;
+    }
+    return (
       <a href={href} className="text-green">
         {children}
       </a>
     );
-
+  };
   const H2Tag = ({ children }: LinkTagProps) => (
     <h2 className="text-black text-2xl md:text-3xl font-bold mb-3">
       {children}
