@@ -1,0 +1,14 @@
+query getPostsByCategory($category: CategoryWhereInput!) {
+  posts(first: 5, orderBy: visits_DESC, where: { category_some: $category }) {
+    title
+    id
+    slug
+    coverImage {
+      height
+      id
+      size
+      url
+      width
+    }
+  }
+}

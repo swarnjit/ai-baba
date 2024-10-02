@@ -5244,6 +5244,8 @@ export type Post = Entity & Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
+  /** sets blog if it is featured */
+  isFeatured?: Maybe<Scalars['Boolean']['output']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
   /** User that last published this document */
@@ -5260,6 +5262,8 @@ export type Post = Entity & Node & {
   updatedAt: Scalars['DateTime']['output'];
   /** User that last updated this document */
   updatedBy?: Maybe<User>;
+  /** count the visits to the blog */
+  visits?: Maybe<Scalars['Int']['output']>;
 };
 
 
@@ -5387,10 +5391,12 @@ export type PostCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   date: Scalars['Date']['input'];
   excerpt?: InputMaybe<Scalars['String']['input']>;
+  isFeatured?: InputMaybe<Scalars['Boolean']['input']>;
   seoOverride?: InputMaybe<SeoOverrideCreateOneInlineInput>;
   slug: Scalars['String']['input'];
   title: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  visits?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PostCreateManyInlineInput = {
@@ -5503,6 +5509,9 @@ export type PostManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  isFeatured?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  isFeatured_not?: InputMaybe<Scalars['Boolean']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5577,6 +5586,21 @@ export type PostManyWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  visits?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  visits_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  visits_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  visits_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  visits_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  visits_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  visits_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  visits_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 export enum PostOrderByInput {
@@ -5588,6 +5612,8 @@ export enum PostOrderByInput {
   ExcerptDesc = 'excerpt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  IsFeaturedAsc = 'isFeatured_ASC',
+  IsFeaturedDesc = 'isFeatured_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
@@ -5595,7 +5621,9 @@ export enum PostOrderByInput {
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC'
+  UpdatedAtDesc = 'updatedAt_DESC',
+  VisitsAsc = 'visits_ASC',
+  VisitsDesc = 'visits_DESC'
 }
 
 export type PostUpdateInput = {
@@ -5605,9 +5633,11 @@ export type PostUpdateInput = {
   coverImage?: InputMaybe<AssetUpdateOneInlineInput>;
   date?: InputMaybe<Scalars['Date']['input']>;
   excerpt?: InputMaybe<Scalars['String']['input']>;
+  isFeatured?: InputMaybe<Scalars['Boolean']['input']>;
   seoOverride?: InputMaybe<SeoOverrideUpdateOneInlineInput>;
   slug?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  visits?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PostUpdateManyInlineInput = {
@@ -5631,7 +5661,9 @@ export type PostUpdateManyInput = {
   content?: InputMaybe<Scalars['RichTextAST']['input']>;
   date?: InputMaybe<Scalars['Date']['input']>;
   excerpt?: InputMaybe<Scalars['String']['input']>;
+  isFeatured?: InputMaybe<Scalars['Boolean']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  visits?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PostUpdateManyWithNestedWhereInput = {
@@ -5770,6 +5802,9 @@ export type PostWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']['input']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']['input']>;
+  isFeatured?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  isFeatured_not?: InputMaybe<Scalars['Boolean']['input']>;
   publishedAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5844,6 +5879,21 @@ export type PostWhereInput = {
   /** All values that are not contained in given list. */
   updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
   updatedBy?: InputMaybe<UserWhereInput>;
+  visits?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than the given value. */
+  visits_gt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values greater than or equal the given value. */
+  visits_gte?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are contained in given list. */
+  visits_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  /** All values less than the given value. */
+  visits_lt?: InputMaybe<Scalars['Int']['input']>;
+  /** All values less than or equal the given value. */
+  visits_lte?: InputMaybe<Scalars['Int']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  visits_not?: InputMaybe<Scalars['Int']['input']>;
+  /** All values that are not contained in given list. */
+  visits_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 /** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
@@ -8277,6 +8327,11 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type GetAllCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllCategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, name: string, slug: string }> };
+
 export type LatestPostQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -8287,7 +8342,7 @@ export type PostBySlugQueryVariables = Exact<{
 }>;
 
 
-export type PostBySlugQuery = { __typename?: 'Query', post?: { __typename?: 'Post', title: string, id: string, stage: Stage, author?: { __typename?: 'Author', name: string, title?: string | null, picture?: { __typename?: 'Asset', altText?: string | null, authorAvatar: Array<{ __typename?: 'Author', picture?: { __typename?: 'Asset', fileName: string, height?: number | null, size?: number | null, url: string, width?: number | null } | null }> } | null } | null, content: { __typename?: 'PostContentRichText', html: string, json: any, markdown: string, text: string }, coverImage?: { __typename?: 'Asset', height?: number | null, id: string, size?: number | null, url: string, width?: number | null } | null } | null };
+export type PostBySlugQuery = { __typename?: 'Query', post?: { __typename?: 'Post', title: string, id: string, stage: Stage, author?: { __typename?: 'Author', name: string, title?: string | null, picture?: { __typename?: 'Asset', altText?: string | null, authorAvatar: Array<{ __typename?: 'Author', picture?: { __typename?: 'Asset', fileName: string, height?: number | null, size?: number | null, url: string, width?: number | null } | null }> } | null } | null, content: { __typename?: 'PostContentRichText', html: string, json: any, markdown: string, text: string }, coverImage?: { __typename?: 'Asset', height?: number | null, id: string, size?: number | null, url: string, width?: number | null } | null, category: Array<{ __typename?: 'Category', name: string }> } | null };
 
 export type AllPostsQueryVariables = Exact<{
   orderBy?: InputMaybe<PostOrderByInput>;
@@ -8299,12 +8354,55 @@ export type AllPostsQueryVariables = Exact<{
 
 export type AllPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', id: string, title: string, slug: string, excerpt?: string | null, date: any, coverImage?: { __typename?: 'Asset', id: string, url: string } | null, content: { __typename?: 'PostContentRichText', text: string }, author?: { __typename?: 'Author', id: string } | null }> };
 
-export type GetAllCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetPostsByCategoryQueryVariables = Exact<{
+  category: CategoryWhereInput;
+}>;
 
 
-export type GetAllCategoriesQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, name: string, slug: string }> };
+export type GetPostsByCategoryQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', title: string, id: string, slug: string, coverImage?: { __typename?: 'Asset', height?: number | null, id: string, size?: number | null, url: string, width?: number | null } | null }> };
 
 
+export const GetAllCategoriesDocument = gql`
+    query GetAllCategories {
+  categories(orderBy: name_ASC) {
+    id
+    name
+    slug
+  }
+}
+    `;
+
+/**
+ * __useGetAllCategoriesQuery__
+ *
+ * To run a query within a React component, call `useGetAllCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+      }
+export function useGetAllCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+        }
+export function useGetAllCategoriesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+        }
+export type GetAllCategoriesQueryHookResult = ReturnType<typeof useGetAllCategoriesQuery>;
+export type GetAllCategoriesLazyQueryHookResult = ReturnType<typeof useGetAllCategoriesLazyQuery>;
+export type GetAllCategoriesSuspenseQueryHookResult = ReturnType<typeof useGetAllCategoriesSuspenseQuery>;
+export type GetAllCategoriesQueryResult = Apollo.QueryResult<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>;
 export const LatestPostDocument = gql`
     query latestPost {
   posts(first: 1, orderBy: publishedAt_DESC) {
@@ -8410,6 +8508,9 @@ export const PostBySlugDocument = gql`
       width
     }
     stage
+    category {
+      name
+    }
   }
 }
     `;
@@ -8503,47 +8604,55 @@ export type AllPostsQueryHookResult = ReturnType<typeof useAllPostsQuery>;
 export type AllPostsLazyQueryHookResult = ReturnType<typeof useAllPostsLazyQuery>;
 export type AllPostsSuspenseQueryHookResult = ReturnType<typeof useAllPostsSuspenseQuery>;
 export type AllPostsQueryResult = Apollo.QueryResult<AllPostsQuery, AllPostsQueryVariables>;
-export const GetAllCategoriesDocument = gql`
-    query GetAllCategories {
-  categories(orderBy: name_ASC) {
+export const GetPostsByCategoryDocument = gql`
+    query getPostsByCategory($category: CategoryWhereInput!) {
+  posts(first: 5, orderBy: visits_DESC, where: {category_some: $category}) {
+    title
     id
-    name
     slug
+    coverImage {
+      height
+      id
+      size
+      url
+      width
+    }
   }
 }
     `;
 
 /**
- * __useGetAllCategoriesQuery__
+ * __useGetPostsByCategoryQuery__
  *
- * To run a query within a React component, call `useGetAllCategoriesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAllCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetPostsByCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPostsByCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetAllCategoriesQuery({
+ * const { data, loading, error } = useGetPostsByCategoryQuery({
  *   variables: {
+ *      category: // value for 'category'
  *   },
  * });
  */
-export function useGetAllCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+export function useGetPostsByCategoryQuery(baseOptions: Apollo.QueryHookOptions<GetPostsByCategoryQuery, GetPostsByCategoryQueryVariables> & ({ variables: GetPostsByCategoryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+        return Apollo.useQuery<GetPostsByCategoryQuery, GetPostsByCategoryQueryVariables>(GetPostsByCategoryDocument, options);
       }
-export function useGetAllCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+export function useGetPostsByCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostsByCategoryQuery, GetPostsByCategoryQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+          return Apollo.useLazyQuery<GetPostsByCategoryQuery, GetPostsByCategoryQueryVariables>(GetPostsByCategoryDocument, options);
         }
-export function useGetAllCategoriesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>) {
+export function useGetPostsByCategorySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetPostsByCategoryQuery, GetPostsByCategoryQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>(GetAllCategoriesDocument, options);
+          return Apollo.useSuspenseQuery<GetPostsByCategoryQuery, GetPostsByCategoryQueryVariables>(GetPostsByCategoryDocument, options);
         }
-export type GetAllCategoriesQueryHookResult = ReturnType<typeof useGetAllCategoriesQuery>;
-export type GetAllCategoriesLazyQueryHookResult = ReturnType<typeof useGetAllCategoriesLazyQuery>;
-export type GetAllCategoriesSuspenseQueryHookResult = ReturnType<typeof useGetAllCategoriesSuspenseQuery>;
-export type GetAllCategoriesQueryResult = Apollo.QueryResult<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>;
+export type GetPostsByCategoryQueryHookResult = ReturnType<typeof useGetPostsByCategoryQuery>;
+export type GetPostsByCategoryLazyQueryHookResult = ReturnType<typeof useGetPostsByCategoryLazyQuery>;
+export type GetPostsByCategorySuspenseQueryHookResult = ReturnType<typeof useGetPostsByCategorySuspenseQuery>;
+export type GetPostsByCategoryQueryResult = Apollo.QueryResult<GetPostsByCategoryQuery, GetPostsByCategoryQueryVariables>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {

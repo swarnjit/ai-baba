@@ -32,5 +32,8 @@ query PostBySlug($slug: String) {
       width
     }
     stage
+    category {
+      name
+    }
   }
 }

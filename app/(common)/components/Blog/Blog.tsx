@@ -9,6 +9,7 @@ import PTag from "../Tags/PTag";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import H3Tag from "../Tags/H3Tag";
+import H2Tag from "../Tags/H2Tag";
 
 interface LinkTagProps {
   children: React.ReactNode;
@@ -21,7 +22,6 @@ type Params = {
   };
 };
 const Blog = ({ params }: Params) => {
-  const router = useSearchParams();
   const { loading, error, data } = usePostBySlugQuery({
     variables: { slug: params.blogSlug },
   });
@@ -36,11 +36,6 @@ const Blog = ({ params }: Params) => {
       </a>
     );
   };
-  const H2Tag = ({ children }: LinkTagProps) => (
-    <h2 className="text-black text-2xl md:text-3xl font-bold mb-3">
-      {children}
-    </h2>
-  );
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :</p>;
   if (!data?.post) <p>No Data: </p>;
@@ -49,7 +44,7 @@ const Blog = ({ params }: Params) => {
   if (post === undefined || post == null) return <p>No data</p>;
   console.log("as path", post?.author?.name);
   return (
-    <div className="pt-16 pr-3">
+    <div className="pr-3">
       <h3 className="text-black text-3xl md:text-4xl font-bold mb-3">
         {post?.title}
       </h3>

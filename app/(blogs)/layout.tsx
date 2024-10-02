@@ -1,7 +1,5 @@
-import Navbar from "@/app/(common)/components/Navbar/Navbar";
 import { Metadata } from "next";
 import Provider from "@/components/Providers/ApolloProvider";
-import SidePanel from "@/components/SidePanel/SidePanel";
 
 export const metadata: Metadata = {
   title: "AI-BABA | Home",
