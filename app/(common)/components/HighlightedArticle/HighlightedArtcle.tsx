@@ -37,9 +37,9 @@ const HighlightedArticle = () => {
   };
 
   return (
-    <div className="bg-offwhite rounded-3xl relative min-h-60 flex flex-row w-full p-6 gap-5 mb-10">
-      <div className="w-1/2 flex flex-col">
-        <div className="rounded-lg w-auto h-80 overflow-hidden object-cover relative p-4">
+    <div className="bg-offwhite rounded-3xl relative min-h-60 flex md:flex-row flex-col w-full p-4 md:p-6 gap-5 mb-10">
+      <div className="md:w-1/2 lg:w-1/2 flex md:flex-col flex-row w-full">
+        <div className="rounded-lg w-full md:w-auto h-80 overflow-hidden object-cover relative p-4">
           {post?.coverImage?.url && (
             <Image
               className="pl-0 h-screen-md"
@@ -50,7 +50,7 @@ const HighlightedArticle = () => {
           )}
         </div>
       </div>
-      <div className="w-1/2">
+      <div className="md:w-1/2 lg:w-1/2">
         <h1 className="text-2xl mb-5">{post?.title}</h1>
         <Markdown
           remarkPlugins={[remarkGfm]}

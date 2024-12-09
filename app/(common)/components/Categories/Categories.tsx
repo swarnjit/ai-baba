@@ -36,15 +36,15 @@ const CategoryList = () => {
   const { loading, error, data: dataServer } = useGetAllCategoriesQuery();
   const categories = dataServer?.categories;
   return (
-    <div className="">
+    <div className="p-4">
       <h1 className="text-black text-3xl md:text-5xl font-bold mb-8">
         Popular Categories
       </h1>
       <div className="flex flex-wrap justify-between gap-6">
         {categories?.map((item) => (
           <Link
-            href="/blog?cat=style"
-            className="rounded-xl overflow-hidden w-1/5 h-40 flex flex-col justify-center bg-[#ecf2ff;]"
+            href={`/blog?cat=${item.slug}`}
+            className="rounded-xl overflow-hidden w-full md:w-1/5 h-15 md:h-40 flex flex-col justify-center bg-[#ecf2ff;]"
             key={item?.name}
           >
             {/* <div className="flex flex-row justify-center align-middle w-full">
@@ -54,7 +54,7 @@ const CategoryList = () => {
               </Avatar>
             </div> */}
             <div className="w-full flex flex-row justify-center align-middle">
-              <p className="text-xl font-bold text-justify text-[#2D6ADE]">
+              <p className="text-lg md:text-xl font-bold text-justify text-[#2D6ADE]">
                 {item?.name}
               </p>
             </div>

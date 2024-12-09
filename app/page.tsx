@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <main>
       <Banner />
-      <div className="mx-auto max-w-7xl relative">
+      <div className="mx-auto max-w-7xl relative px-4 md:px-6">
         <HighlightedArticle />
         <CategoryList />
         <div id="#recent_posts">

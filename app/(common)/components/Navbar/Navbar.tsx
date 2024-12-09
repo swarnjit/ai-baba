@@ -42,19 +42,21 @@ const Navbar = () => {
             <div className="flex flex-1 items-center sm:justify-between">
               {/* LOGO */}
 
-              <div className="flex flex-shrink-0 items-center">
-                <img
-                  className="block h-10 w-20px lg:hidden"
-                  src={"/images/Logo/logo_v1.png"}
-                  alt="Crypto-Logo"
-                />
-                <img
-                  className="hidden h-8 w-auto lg:block"
-                  src={"/images/Logo/logo_v1.png"}
-                  alt="AI-Baba-Logo"
-                />
-                <p className="pl-4 font-bold text-2xl text-white">AI Baba</p>
-              </div>
+              <Link href={"/"}>
+                <div className="flex flex-shrink-0 items-center">
+                  <img
+                    className="block h-10 w-20px lg:hidden"
+                    src={"/images/Logo/logo_v1.png"}
+                    alt="Logo"
+                  />
+                  <img
+                    className="hidden h-8 w-auto lg:block"
+                    src={"/images/Logo/logo_v1.png"}
+                    alt="AI-Baba-Logo"
+                  />
+                  <p className="pl-4 font-bold text-2xl text-white">AI Baba</p>
+                </div>
+              </Link>
 
               {/* LINKS */}
 
